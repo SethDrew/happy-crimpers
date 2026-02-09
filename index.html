@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Happy Crimpers</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HOME SCREEN -->
+  <div id="home-screen" class="screen active">
+    <h1 class="app-title">Happy Crimpers</h1>
+    <div class="home-buttons">
+      <button class="workout-btn" data-workout="maxhang">Max Hang</button>
+      <button class="workout-btn" data-workout="cooldown">Cooldown</button>
+    </div>
+    <p class="disclaimer">Ensure your warm-up is complete before starting any workout.</p>
+  </div>
+
+  <!-- WORKOUT SCREEN -->
+  <div id="workout-screen" class="screen">
+    <div class="hangboard-container">
+      <!-- Beastmaker 2000 SVG -->
+      <svg id="hangboard-svg" viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Board body -->
+        <rect x="0" y="0" width="580" height="200" rx="12" ry="12" fill="#8B6914" />
+        <rect x="4" y="4" width="572" height="192" rx="10" ry="10" fill="#A0782C" />
+        <!-- Wood grain lines -->
+        <line x1="30" y1="0" x2="30" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.4"/>
+        <line x1="90" y1="0" x2="90" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.3"/>
+        <line x1="160" y1="0" x2="165" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.4"/>
+        <line x1="250" y1="0" x2="248" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.3"/>
+        <line x1="330" y1="0" x2="332" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.4"/>
+        <line x1="420" y1="0" x2="418" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.3"/>
+        <line x1="490" y1="0" x2="492" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.4"/>
+        <line x1="550" y1="0" x2="548" y2="200" stroke="#96701E" stroke-width="0.5" opacity="0.3"/>
+
+        <!-- TOP ROW: Slopers -->
+        <!-- 45° sloper left -->
+        <path d="M 30,20 L 80,20 L 75,50 L 35,50 Z" class="hold" data-hold="sloper45l"/>
+        <!-- 35° sloper left -->
+        <path d="M 120,18 L 170,18 L 167,48 L 123,48 Z" class="hold" data-hold="sloper35l"/>
+        <!-- 20° sloper center -->
+        <path d="M 250,16 L 330,16 L 328,46 L 252,46 Z" class="hold" data-hold="sloper20"/>
+        <!-- 35° sloper right -->
+        <path d="M 410,18 L 460,18 L 457,48 L 413,48 Z" class="hold" data-hold="sloper35r"/>
+        <!-- 45° sloper right -->
+        <path d="M 500,20 L 550,20 L 545,50 L 505,50 Z" class="hold" data-hold="sloper45r"/>
+
+        <!-- MIDDLE ROW: Pockets and edges -->
+        <!-- Medium 3-finger pocket left -->
+        <rect x="28" y="75" width="55" height="22" rx="4" class="hold" data-hold="3fp-l"/>
+        <!-- Small 2-finger pocket left -->
+        <rect x="130" y="78" width="35" height="18" rx="3" class="hold" data-hold="2fp-l"/>
+        <!-- 22mm middle edge -->
+        <rect x="230" y="80" width="120" height="12" rx="2" class="hold" data-hold="edge22"/>
+        <!-- Small 2-finger pocket right -->
+        <rect x="415" y="78" width="35" height="18" rx="3" class="hold" data-hold="2fp-r"/>
+        <!-- Medium 3-finger pocket right -->
+        <rect x="497" y="75" width="55" height="22" rx="4" class="hold" data-hold="3fp-r"/>
+
+        <!-- BOTTOM ROW: Back pockets, monos, and 4-finger jug -->
+        <!-- Back 2-pocket left -->
+        <rect x="35" y="140" width="40" height="20" rx="4" class="hold" data-hold="back2-l"/>
+        <!-- Sloping mono left -->
+        <ellipse cx="140" cy="152" rx="10" ry="12" class="hold" data-hold="mono-l"/>
+        <!-- 4-FINGER JUG (center) - THE MAIN HOLD -->
+        <rect x="215" y="135" width="150" height="30" rx="8" class="hold" data-hold="jug4"/>
+        <!-- 1-pad mono right -->
+        <ellipse cx="440" cy="152" rx="10" ry="12" class="hold" data-hold="mono-r"/>
+        <!-- Back 2-pocket right -->
+        <rect x="505" y="140" width="40" height="20" rx="4" class="hold" data-hold="back2-r"/>
+
+        <!-- Labels (hidden by default, shown contextually) -->
+        <text x="290" y="180" text-anchor="middle" class="hold-label" id="jug-label" fill="transparent" font-size="11" font-weight="bold">4-Finger Jug</text>
+        <text x="290" y="180" text-anchor="middle" class="hold-label" id="any-label" fill="transparent" font-size="11" font-weight="bold">Your Choice</text>
+      </svg>
+    </div>
+
+    <div class="workout-info">
+      <div id="workout-name" class="workout-name"></div>
+      <div id="set-progress" class="set-progress"></div>
+    </div>
+
+    <div id="phase-label" class="phase-label"></div>
+    <div id="timer-display" class="timer-display">00</div>
+
+    <button id="stop-btn" class="stop-btn">Stop</button>
+  </div>
+
+  <!-- COMPLETE SCREEN -->
+  <div id="complete-screen" class="screen">
+    <h2 class="complete-title">Workout Complete</h2>
+    <button id="done-btn" class="workout-btn">Back to Home</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
